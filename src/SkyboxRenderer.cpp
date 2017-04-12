@@ -8,7 +8,8 @@ SkyboxRenderer::SkyboxRenderer(glm::mat4 projectionMatrix) : m_shader(ModelShade
 {
 
 
-	m_cube = OBJLoader::loadObjModel("skyCube"); // Note NORMALS FACE INWARDS!
+	m_cube = OBJLoader::loadObjModel("skyCube"); // Note NORMALS FACE INWARD!
+	m_cubeMapTexture = Loader::loadCubeMap(m_skyCubeFaces);
 
 	//std::cout << m_cube->getVaoID();
 	m_shader.use();
@@ -40,6 +41,9 @@ void SkyboxRenderer::render(glm::mat4 view, glm::mat4 model)
 	//glActiveTexture(GL_TEXTURE0);
 	//glBindTexture(GL_TEXTURE_2D, texture);
 	//texture2->bind();
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubeMapTexture);
 
 	glDrawElements(GL_TRIANGLES, m_cube->getVertexCount(), GL_UNSIGNED_INT, 0);
 	//glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);

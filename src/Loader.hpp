@@ -21,5 +21,7 @@ public:
 
 	static Texture* loadTexture(std::string fileName);
 
+	static GLuint loadCubeMap(std::vector<std::string> cubeFaces);
+
 };
 

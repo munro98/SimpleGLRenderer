@@ -24,6 +24,7 @@ private:
 	static std::vector<float> m_vertices;
 	Mesh *m_cube;
 	ModelShader m_shader;
+	GLuint m_cubeMapTexture;
 
 	
 };

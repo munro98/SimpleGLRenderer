@@ -67,7 +67,7 @@ void Loader::bindIndicesBuffer(std::vector<int>& indices)
 Texture* Loader::loadTexture(std::string fileName)
 {
 	fileName = "./res/" + fileName + ".png";
-	std::cout << fileName;
+	//std::cout << fileName;
 	const char *textureName = fileName.c_str();
 	//char *textureName = "./res/TextureMap.png";
 	int x, y, bytesPerPixel;
@@ -90,4 +90,30 @@ Texture* Loader::loadTexture(std::string fileName)
 
 	return new Texture(x, y, textureID);
 
+}
+
+
+GLuint Loader::loadCubeMap(std::vector<std::string> cubeFaces) {
+
+	GLuint texID;
+	glGenTextures(1, &texID);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, texID);
+
+	for (int i = 0; i < cubeFaces.size(); i++) {
+
+		std::string fileName = "./res/" + cubeFaces[i] + ".png";
+		const char *textureName = fileName.c_str();
+		int x, y, bytesPerPixel;
+
+		unsigned char* textureData = stbi_load(textureName, &x, &y, &bytesPerPixel, 3);
+
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, x, y, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData);
+		stbi_image_free(textureData);
+
+	}
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	return texID;
 }
