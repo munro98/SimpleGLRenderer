@@ -35,7 +35,6 @@ static const float zfar = 1000.0f;
 
 bool leftMouseDown = false;
 glm::vec2 mousePosition;
-glm::vec2 mouseBuffer;
 
 
 bool hasWindowFocus = true;
