@@ -13,6 +13,10 @@ SET(headers
 	"Loader.hpp"
 	"Camera.hpp"
 	"Texture.hpp"
+	"SkyboxShader.hpp"
+	"SkyboxRenderer.hpp"
+	
+	
 	"stb_image.h"
 )
 
@@ -32,6 +36,9 @@ SET(sources
 	"Loader.cpp"
 	"Camera.cpp"
 	"Texture.cpp"
+	"SkyboxShader.cpp"
+	"SkyboxRenderer.cpp"
+	
 	"stb_image.c"
 )
 

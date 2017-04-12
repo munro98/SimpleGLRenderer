@@ -7,7 +7,7 @@ Mesh::Mesh(GLuint vaoID, int vertexCount) : m_vaoID(vaoID), m_vertexCount(vertex
 	
 }
 
-
+//TODO Delete Mesh Data
 Mesh::~Mesh()
 {
 }

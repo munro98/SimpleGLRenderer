@@ -20,6 +20,7 @@
 #include "Camera.hpp"
 #include "Loader.hpp"
 #include "ModelRenderer.hpp"
+#include "SkyboxRenderer.hpp"
 
 
 using namespace std;
@@ -161,16 +162,18 @@ int main(int argc, char **argv) {
 		abort();
 	}
 
+	glm::mat4 projection = glm::perspective(80.0f, (float)640 / (float)480, 0.1f, 1000.0f);
+	glm::mat4 model;
 
 	Camera camera;
+	SkyboxRenderer skyboxRenderer(projection);
 	TriangleRenderer triangleRenderer;
 	ModelRenderer ModelRenderer;
 
 	Mesh* mesh = OBJLoader::loadObjModel("sphere");
 
 	
-	glm::mat4 projection = glm::perspective(80.0f, (float)640 / (float)480, 0.1f, 1000.0f);
-	glm::mat4 model;
+	
 
 	ModelShader shader = ModelShader("modelShader");
 	shader.use();
@@ -259,7 +262,7 @@ int main(int argc, char **argv) {
 		texture2->bind();
 
 		glDrawElements(GL_TRIANGLES, mesh->getVertexCount(), GL_UNSIGNED_INT, 0);
-		//glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+
 
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
@@ -269,6 +272,8 @@ int main(int argc, char **argv) {
 
 
 		//glDisable(GL_DEPTH_TEST);
+
+		skyboxRenderer.render(view, model);
 
 		// Render GUI on top
 		SimpleGUI::render();

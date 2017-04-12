@@ -1,5 +1,5 @@
 #pragma once
-#include<memory>
+
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -7,9 +7,6 @@
 
 #include "Mesh.hpp"
 #include "Texture.hpp"
-
-
-
 
 class Loader
 {

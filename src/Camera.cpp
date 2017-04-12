@@ -46,12 +46,12 @@ void Camera::Rotate(float x, float y) {
 	mYaw += x;
 	mPitch += y;
 
-	///*
+	// Clamp camera pitch
 	if (mPitch > 89.0f)
 		mPitch = 89.0f;
 	if (mPitch < -89.0f)
 		mPitch = -89.0f;
-	//*/
+
 
 	glm::vec3 front;
 	front.x = cos(glm::radians(mYaw)) * cos(glm::radians(mPitch));
