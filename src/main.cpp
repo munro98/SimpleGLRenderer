@@ -165,22 +165,11 @@ int main(int argc, char **argv) {
 	glm::mat4 model;
 
 	Camera camera;
-	SkyboxRenderer skyboxRenderer(projection);
+	//SkyboxRenderer skyboxRenderer(projection);
 	TriangleRenderer triangleRenderer;
-	ModelRenderer ModelRenderer;
-
-	Mesh* mesh = OBJLoader::loadObjModel("sphere");
+	ModelRenderer modelRenderer(projection);
 
 	
-	
-
-	ModelShader shader = ModelShader("modelShader");
-	shader.use();
-
-	shader.loadProjectionMatrix(projection);
-	shader.stop();
-
-	Texture* texture2 = Loader::loadTexture("ground2048");
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -243,36 +232,13 @@ int main(int argc, char **argv) {
 		view = glm::lookAt(camera.GetPosition(), camera.GetPosition() + camera.GetFront(), camera.GetUp());
 
 
-		shader.use();
-		//Update uniforms
-		shader.loadModelMatrix(model);
-		shader.loadViewMatrix(view);
-		shader.loadProjectionMatrix(projection);
-
-		glBindVertexArray(mesh->getVaoID());
+		modelRenderer.render(view, model, projection);
 
 
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glEnableVertexAttribArray(2);
-
-		//Bind texture
-		glActiveTexture(GL_TEXTURE0);
-		texture2->bind();
-
-		glDrawElements(GL_TRIANGLES, mesh->getVertexCount(), GL_UNSIGNED_INT, 0);
 
 
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		glDisableVertexAttribArray(2);
-		//*/
-		glBindVertexArray(0);
 
-
-		//glDisable(GL_DEPTH_TEST);
-
-		skyboxRenderer.render(view, model);
+		//skyboxRenderer.render(view, model);
 
 		// Render GUI on top
 		SimpleGUI::render();

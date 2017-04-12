@@ -27,9 +27,9 @@ void SkyboxRenderer::render(glm::mat4 view, glm::mat4 model)
 
 	m_shader.use();
 	//m_shader.loadViewMatrix(viewMatrix);
-	model[3][0] = 0.0f;
-	model[3][1] = 0.0f;
-	model[3][2] = 0.0f;
+	view[3][0] = 0.0f;
+	view[3][1] = 0.0f;
+	view[3][2] = 0.0f;
 	m_shader.loadModelMatrix(model);
 	m_shader.loadViewMatrix(view);
 

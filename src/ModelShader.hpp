@@ -1,5 +1,9 @@
 #pragma once
+
 #include "Shader.hpp"
+#include "OBJLoader.hpp"
+#include "Texture.hpp"
+#include "Loader.hpp"
 
 class ModelShader : public Shader
 {
