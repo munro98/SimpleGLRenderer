@@ -99,9 +99,9 @@ Mesh* OBJLoader::loadObjModel(const std::string& fileName)
 			}
 		}
 
-		std::cout << vertices.size() << " " << textures.size() << " " << normals.size() << " " << indices.size() << " \n";
+		//std::cout << vertices.size() << " " << textures.size() << " " << normals.size() << " " << indices.size() << " \n";
 
-		///*
+
 		while (file.good()) {
 			
 
@@ -132,7 +132,6 @@ Mesh* OBJLoader::loadObjModel(const std::string& fileName)
 			getline(file, line);
 
 		}
-		//*/
 
 
 
@@ -143,9 +142,7 @@ Mesh* OBJLoader::loadObjModel(const std::string& fileName)
 
 	file.close();
 
-
 	//std::cout << output;
-
 	
 	verticesArray.resize(vertices.size() * 3);
 
@@ -159,25 +156,23 @@ Mesh* OBJLoader::loadObjModel(const std::string& fileName)
 		verticesArray[vertexIndex++] = vertex.z;
 	}
 
-	std::cout << verticesArray.size() << " " << texturesArray.size() << " " << normalsArray.size() << " " << indices.size() <<  " \n";
+	//std::cout << verticesArray.size() << " " << texturesArray.size() << " " << normalsArray.size() << " " << indices.size() <<  " \n";
 
 
 	Mesh *mesh = Loader::loadToVAO(verticesArray, texturesArray, normalsArray, indices);
+	//Mesh *mesh = Loader::loadToVAO2(verticesArray, texturesArray, normalsArray, indices);
 	return mesh;
 }
 
 void OBJLoader::processVertex(int vi1, int vi2, int vi3, std::vector<int>& indices, std::vector<glm::vec2>& textures, std::vector<glm::vec3>& normals, std::vector<float>& texturesArray, std::vector<float> normalsArray)
-//void OBJLoader::processVertex(int vi1, int vi2, int vi3, std::vector<int>& indices, std::vector<sf::Vector2f>& textures, std::vector<sf::Vector3f>& normals, std::unique_ptr<float[]>& texturesArray, std::unique_ptr<float[]>& normalsArray)
 {
 	int currentVertexIndex = vi1 - 1;
 	indices.push_back(currentVertexIndex);
 
-	
-	//std::cout << texturesArray.capacity() << " " << currentVertexIndex * 2 << " \n";
+
 	glm::vec2 currentTex = textures[vi2 - 1];
 
-	//texturesArray.insert(texturesArray.begin() + currentVertexIndex * 2, currentTex.x);
-	//texturesArray.insert(texturesArray.begin() + currentVertexIndex * 2+1, 1 - currentTex.y);
+
 	texturesArray[currentVertexIndex * 2] = currentTex.x;
 	texturesArray[currentVertexIndex * 2+1] = 1 - currentTex.y;
 

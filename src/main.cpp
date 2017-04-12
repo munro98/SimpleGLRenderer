@@ -21,6 +21,7 @@
 #include "Loader.hpp"
 #include "ModelRenderer.hpp"
 #include "SkyboxRenderer.hpp"
+#include "PBRModelRenderer.hpp"
 
 
 using namespace std;
@@ -168,6 +169,7 @@ int main(int argc, char **argv) {
 	//SkyboxRenderer skyboxRenderer(projection);
 	TriangleRenderer triangleRenderer;
 	ModelRenderer modelRenderer(projection);
+	PBRModelRenderer pbrmodelRenderer(projection);
 
 	
 
@@ -234,7 +236,7 @@ int main(int argc, char **argv) {
 
 		modelRenderer.render(view, model, projection);
 
-
+		//pbrmodelRenderer.render(view, model, projection);
 
 
 
