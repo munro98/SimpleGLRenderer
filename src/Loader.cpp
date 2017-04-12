@@ -86,6 +86,8 @@ Texture* Loader::loadTexture(std::string fileName)
 	glGenerateMipmap(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
+	stbi_image_free(textureData);
+
 	return new Texture(x, y, textureID);
 
 }

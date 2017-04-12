@@ -161,6 +161,7 @@ int main(int argc, char **argv) {
 		abort();
 	}
 
+
 	Camera camera;
 	TriangleRenderer triangleRenderer;
 	ModelRenderer ModelRenderer;
@@ -201,6 +202,25 @@ int main(int argc, char **argv) {
 		camera.Rotate(xoffset, -yoffset);
 
 
+		if (glfwGetKey(window, GLFW_KEY_A))
+		{
+			camera.Left();
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_D))
+		{
+			camera.Right();
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_W))
+		{
+			camera.Forward();
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_S))
+		{
+			camera.Backward();
+		}
 
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
