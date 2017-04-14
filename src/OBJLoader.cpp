@@ -141,8 +141,6 @@ Mesh* OBJLoader::loadObjModel(const std::string& fileName)
 	}
 
 	file.close();
-
-	//std::cout << output;
 	
 	verticesArray.resize(vertices.size() * 3);
 
@@ -160,11 +158,10 @@ Mesh* OBJLoader::loadObjModel(const std::string& fileName)
 
 
 	Mesh *mesh = Loader::loadToVAO(verticesArray, texturesArray, normalsArray, indices);
-	//Mesh *mesh = Loader::loadToVAO2(verticesArray, texturesArray, normalsArray, indices);
 	return mesh;
 }
 
-void OBJLoader::processVertex(int vi1, int vi2, int vi3, std::vector<int>& indices, std::vector<glm::vec2>& textures, std::vector<glm::vec3>& normals, std::vector<float>& texturesArray, std::vector<float> normalsArray)
+void OBJLoader::processVertex(int vi1, int vi2, int vi3, std::vector<int>& indices, std::vector<glm::vec2>& textures, std::vector<glm::vec3>& normals, std::vector<float>& texturesArray, std::vector<float>& normalsArray)
 {
 	int currentVertexIndex = vi1 - 1;
 	indices.push_back(currentVertexIndex);

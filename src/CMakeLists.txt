@@ -17,9 +17,7 @@ SET(headers
 	"Texture.hpp"
 	"SkyboxShader.hpp"
 	"SkyboxRenderer.hpp"
-	
-	
-	"stb_image.h"
+
 )
 
 
@@ -42,8 +40,7 @@ SET(sources
 	"Texture.cpp"
 	"SkyboxShader.cpp"
 	"SkyboxRenderer.cpp"
-	
-	"stb_image.c"
+
 )
 
 #Add executable target
@@ -51,3 +48,4 @@ add_executable(${SIMPLE_GL_RENDERER} ${headers} ${sources})
 #Link libraries
 target_link_libraries(${SIMPLE_GL_RENDERER} PRIVATE glew glfw ${GLFW_LIBRARIES})
 target_link_libraries(${SIMPLE_GL_RENDERER} PRIVATE imgui)
+target_link_libraries(${SIMPLE_GL_RENDERER} PRIVATE stb_image)

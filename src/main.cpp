@@ -113,6 +113,8 @@ int main(int argc, char **argv) {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+	glewExperimental = GL_TRUE;
+
 	//Get the version for GLFW
 	int glfwMajor, glfwMinor, glfwRevision;
 	glfwGetVersion(&glfwMajor, &glfwMinor, &glfwRevision);
@@ -168,7 +170,7 @@ int main(int argc, char **argv) {
 	Camera camera;
 	//SkyboxRenderer skyboxRenderer(projection);
 	TriangleRenderer triangleRenderer;
-	ModelRenderer modelRenderer(projection);
+	//ModelRenderer modelRenderer(projection);
 	PBRModelRenderer pbrmodelRenderer(projection);
 
 	
@@ -234,9 +236,9 @@ int main(int argc, char **argv) {
 		view = glm::lookAt(camera.GetPosition(), camera.GetPosition() + camera.GetFront(), camera.GetUp());
 
 
-		modelRenderer.render(view, model, projection);
+		//modelRenderer.render(view, model, projection);
 
-		//pbrmodelRenderer.render(view, model, projection);
+		pbrmodelRenderer.render(view, model, projection);
 
 
 

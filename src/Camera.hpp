@@ -5,19 +5,19 @@
 class Camera
 {
 public:
-	Camera::Camera();
-	Camera::~Camera();
+	Camera();
+	~Camera();
 
-	void Camera::Forward();
-	void Camera::Backward();
-	void Camera::Left();
-	void Camera::Right();
-	void Camera::Rotate(float pitch, float yaw);
+	void Forward();
+	void Backward();
+	void Left();
+	void Right();
+	void Rotate(float pitch, float yaw);
 
-	glm::vec3 Camera::GetPosition();
-	glm::vec3 Camera::GetFront();
-	glm::vec3 Camera::GetUp();
-	glm::vec3 Camera::GetRight();
+	glm::vec3 GetPosition();
+	glm::vec3 GetFront();
+	glm::vec3 GetUp();
+	glm::vec3 GetRight();
 
 
 private:

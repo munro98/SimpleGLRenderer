@@ -34,6 +34,11 @@ add_subdirectory("${PROJECT_SOURCE_DIR}/ext/imgui")
 include_directories("${PROJECT_SOURCE_DIR}/ext/glm")
 
 
+
+add_subdirectory("${PROJECT_SOURCE_DIR}/ext/stb_image")
+include_directories("${PROJECT_SOURCE_DIR}/ext/stb_image")
+
+
 # Set Compiler Flags
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 	# Full normal warnings
@@ -66,6 +71,7 @@ endif()
 add_subdirectory(src) # Primary source files
 add_subdirectory(res) # Resources like shaders (show up in IDE)
 set_property(TARGET ${SIMPLE_GL_RENDERER} PROPERTY FOLDER "GL_RENDERER")
+
 
 
 
