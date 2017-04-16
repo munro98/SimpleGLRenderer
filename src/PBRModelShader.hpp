@@ -25,6 +25,14 @@ public:
 
 	void loadLightColour(glm::vec3 lightColour);
 
+	void loadCamPos(glm::vec3 camPos);
+
+	void loadMetallic(float value);
+
+	void loadRoughness(float value);
+
+	void loadAO(float value);
+
 private:
 	GLuint m_location_model;
 	GLuint m_location_view;
@@ -32,5 +40,11 @@ private:
 
 	GLuint m_location_lightPosition;
 	GLuint m_location_lightColour;
+
+	GLuint m_location_metallic;
+	GLuint m_location_roughness;
+	GLuint m_location_ao;
+
+	GLuint m_location_camPos;
 };
 

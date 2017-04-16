@@ -35,11 +35,11 @@ static const float zfar = 1000.0f;
 
 
 bool leftMouseDown = false;
-glm::vec2 mousePosition;
-
+glm::vec2 mousePosition = glm::vec2(0.0, 0.0);
+glm::vec2 lastMousePosition = glm::vec2(0.0, 0.0);
 
 bool hasWindowFocus = true;
-
+Camera camera;
 
 void windowFocusCallback(GLFWwindow* win, int focused) {
 	if (focused)
@@ -57,6 +57,14 @@ void windowFocusCallback(GLFWwindow* win, int focused) {
 void cursorPosCallback(GLFWwindow* win, double xpos, double ypos) {
 	// cout << "Mouse Movement Callback :: xpos=" << xpos << "ypos=" << ypos << endl;
 	mousePosition = glm::vec2(xpos, ypos);
+
+	float xoffset = mousePosition.x - lastMousePosition.x;
+	float yoffset = mousePosition.y - lastMousePosition.y;
+
+	lastMousePosition = mousePosition;
+
+	if (leftMouseDown)
+		camera.Rotate(xoffset, -yoffset);
 }
 
 
@@ -96,7 +104,8 @@ void charCallback(GLFWwindow *win, unsigned int c) {
 
 }
 
-
+float deltaFrame = 0.0;
+float lastFrame = 0.0;
 
 int main(int argc, char **argv) {
 
@@ -113,7 +122,6 @@ int main(int argc, char **argv) {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	glewExperimental = GL_TRUE;
 
 	//Get the version for GLFW
 	int glfwMajor, glfwMinor, glfwRevision;
@@ -125,6 +133,8 @@ int main(int argc, char **argv) {
 		cerr << "Error: Could not create GLFW window" << endl;
 		abort();
 	}
+
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// Make the window the current context.
 	// If we have multiple windows we will need to switch contexts
@@ -156,6 +166,7 @@ int main(int argc, char **argv) {
 	glfwSetWindowFocusCallback(window, windowFocusCallback);
 
 	
+	
 
 
 	// Initialize IMGUI
@@ -167,8 +178,8 @@ int main(int argc, char **argv) {
 	glm::mat4 projection = glm::perspective(80.0f, (float)640 / (float)480, 0.1f, 1000.0f);
 	glm::mat4 model;
 
-	Camera camera;
-	//SkyboxRenderer skyboxRenderer(projection);
+	
+	SkyboxRenderer skyboxRenderer(projection);
 	TriangleRenderer triangleRenderer;
 	//ModelRenderer modelRenderer(projection);
 	PBRModelRenderer pbrmodelRenderer(projection);
@@ -177,13 +188,20 @@ int main(int argc, char **argv) {
 
 	while (!glfwWindowShouldClose(window)) {
 
+		float currentFrame = glfwGetTime();
+		deltaFrame = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		//Poll for and process events
+		glfwPollEvents();
+
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
 
 		//Set viewport to be the whole window
 		glViewport(0, 0, width, height);
 
-		
+		/*
 		float xoffset = mousePosition.x - width / 2;
 		float yoffset = mousePosition.y - height / 2;
 
@@ -195,6 +213,7 @@ int main(int argc, char **argv) {
 		xoffset = xoffset * sensitivity;
 		yoffset = yoffset * sensitivity;
 		camera.Rotate(xoffset, -yoffset);
+		*/
 
 
 		if (glfwGetKey(window, GLFW_KEY_A))
@@ -235,14 +254,15 @@ int main(int argc, char **argv) {
 		glm::mat4 view;
 		view = glm::lookAt(camera.GetPosition(), camera.GetPosition() + camera.GetFront(), camera.GetUp());
 
+		skyboxRenderer.render(view, model);
 
 		//modelRenderer.render(view, model, projection);
 
-		pbrmodelRenderer.render(view, model, projection);
+		pbrmodelRenderer.render(view, model, projection, camera.GetPosition());
 
 
 
-		//skyboxRenderer.render(view, model);
+		
 
 		// Render GUI on top
 		SimpleGUI::render();
@@ -250,8 +270,7 @@ int main(int argc, char **argv) {
 		//Swap front and back buffers
 		glfwSwapBuffers(window);
 
-		//Poll for and process events
-		glfwPollEvents();
+		
 	}
 
 	glfwTerminate();

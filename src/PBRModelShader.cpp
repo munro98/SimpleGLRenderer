@@ -27,6 +27,12 @@ void PBRModelShader::getAllUniformLocations()
 
 	m_location_lightPosition = Shader::getUniformLocation("lightPosition");
 	m_location_lightColour = Shader::getUniformLocation("lightColour");
+
+	m_location_metallic = Shader::getUniformLocation("metallic");
+	m_location_roughness = Shader::getUniformLocation("roughness");
+	m_location_ao = Shader::getUniformLocation("ao");
+
+	m_location_camPos = Shader::getUniformLocation("camPos");
 	//assert(m_location_lightPosition != 0);
 	//assert(m_location_lightColour != 0);
 }
@@ -55,4 +61,24 @@ void PBRModelShader::loadLightPosition(glm::vec3 lightColour)
 void PBRModelShader::loadLightColour(glm::vec3 lightColour)
 {
 	Shader::loadVector(m_location_lightColour, lightColour);
+}
+
+void PBRModelShader::loadCamPos(glm::vec3 camPos)
+{
+	Shader::loadVector(m_location_camPos, camPos);
+}
+
+void PBRModelShader::loadMetallic(float value)
+{
+	Shader::loadFloat(m_location_metallic, value);
+}
+
+void PBRModelShader::loadRoughness(float value)
+{
+	Shader::loadFloat(m_location_roughness, value);
+}
+
+void PBRModelShader::loadAO(float value)
+{
+	Shader::loadFloat(m_location_ao, value);
 }
