@@ -8,16 +8,16 @@ public:
 	Camera();
 	~Camera();
 
-	void Forward();
-	void Backward();
-	void Left();
-	void Right();
-	void Rotate(float pitch, float yaw);
+	void forward(float delta);
+	void backward(float delta);
+	void left(float delta);
+	void right(float delta);
+	void rotate(float pitch, float yaw);
 
-	glm::vec3 GetPosition();
-	glm::vec3 GetFront();
-	glm::vec3 GetUp();
-	glm::vec3 GetRight();
+	glm::vec3 getPosition();
+	glm::vec3 getFront();
+	glm::vec3 getUp();
+	glm::vec3 getRight();
 
 
 private:

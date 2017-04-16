@@ -64,7 +64,7 @@ void cursorPosCallback(GLFWwindow* win, double xpos, double ypos) {
 	lastMousePosition = mousePosition;
 
 	if (leftMouseDown)
-		camera.Rotate(xoffset, -yoffset);
+		camera.rotate(xoffset, -yoffset);
 }
 
 
@@ -218,22 +218,22 @@ int main(int argc, char **argv) {
 
 		if (glfwGetKey(window, GLFW_KEY_A))
 		{
-			camera.Left();
+			camera.left(deltaFrame);
 		}
 
 		if (glfwGetKey(window, GLFW_KEY_D))
 		{
-			camera.Right();
+			camera.right(deltaFrame);
 		}
 
 		if (glfwGetKey(window, GLFW_KEY_W))
 		{
-			camera.Forward();
+			camera.forward(deltaFrame);
 		}
 
 		if (glfwGetKey(window, GLFW_KEY_S))
 		{
-			camera.Backward();
+			camera.backward(deltaFrame);
 		}
 
 
@@ -252,13 +252,13 @@ int main(int argc, char **argv) {
 
 		//////////////////////////////////////////////////////
 		glm::mat4 view;
-		view = glm::lookAt(camera.GetPosition(), camera.GetPosition() + camera.GetFront(), camera.GetUp());
+		view = glm::lookAt(camera.getPosition(), camera.getPosition() + camera.getFront(), camera.getUp());
 
 		skyboxRenderer.render(view, model);
 
 		//modelRenderer.render(view, model, projection);
 
-		pbrmodelRenderer.render(view, model, projection, camera.GetPosition());
+		pbrmodelRenderer.render(view, model, projection, camera.getPosition());
 
 
 
