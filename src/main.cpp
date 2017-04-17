@@ -127,6 +127,7 @@ int main(int argc, char **argv) {
 	int glfwMajor, glfwMinor, glfwRevision;
 	glfwGetVersion(&glfwMajor, &glfwMinor, &glfwRevision);
 
+
 	//Create a windowed mode window and its OpenGL context
 	window = glfwCreateWindow(640, 480, "Hello World", nullptr, nullptr);
 	if (!window) {
@@ -165,8 +166,9 @@ int main(int argc, char **argv) {
 	glfwSetCharCallback(window, charCallback);
 	glfwSetWindowFocusCallback(window, windowFocusCallback);
 
-	
-	
+	int num_texture_units;
+	glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &num_texture_units);
+	cout << "Texture Units " << num_texture_units << endl;
 
 
 	// Initialize IMGUI
@@ -243,7 +245,7 @@ int main(int argc, char **argv) {
 		projection = glm::perspective(90.0f, (float)width / (float)height, 0.1f, 1000.0f);
 
 		// Enable flags for normal rendering
-		//glDisable(GL_CULL_FACE);
+		glDisable(GL_CULL_FACE);
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
 

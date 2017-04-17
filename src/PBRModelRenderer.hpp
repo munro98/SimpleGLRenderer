@@ -5,6 +5,8 @@
 #include "Texture.hpp"
 #include "PBRModelShader.hpp"
 
+#include "Terrain.hpp"
+
 class PBRModelRenderer
 {
 public:
@@ -17,5 +19,7 @@ private:
 	PBRModelShader m_shader;
 	Mesh* m_mesh;
 	Texture* m_texture;
+
+	Terrain m_terrain;
 };
 

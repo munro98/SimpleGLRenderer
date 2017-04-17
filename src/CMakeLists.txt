@@ -17,6 +17,8 @@ SET(headers
 	"Texture.hpp"
 	"SkyboxShader.hpp"
 	"SkyboxRenderer.hpp"
+	"Terrain.hpp"
+	"HeightGenerator.hpp"
 
 )
 
@@ -40,7 +42,8 @@ SET(sources
 	"Texture.cpp"
 	"SkyboxShader.cpp"
 	"SkyboxRenderer.cpp"
-
+	"Terrain.cpp"
+	"HeightGenerator.cpp"
 )
 
 #Add executable target
