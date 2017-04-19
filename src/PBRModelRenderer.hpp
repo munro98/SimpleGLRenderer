@@ -1,6 +1,5 @@
 #pragma once
 #include "Shader.hpp"
-#include "ModelShader.hpp"
 #include "Mesh.hpp"
 #include "Texture.hpp"
 #include "PBRModelShader.hpp"

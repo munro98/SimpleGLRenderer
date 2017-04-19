@@ -103,3 +103,52 @@ int HeightGenerator::hash(int x, int y)
 	y = hash(y);
 	return hash(x ^ (y << 2));
 }
+
+glm::vec3 HeightGenerator::fractalSplit(glm::vec3 v1, glm::vec3 v2)
+{
+	glm::vec3 delta = v1 - v2;
+	delta = delta * 0.5f;
+	return v1 - delta;
+
+
+}
+
+float HeightGenerator::random()
+{
+	//rng.seed(std::random_device()());
+	static std::mt19937 rng;
+	static std::uniform_real_distribution<float> dist(-1.0f, 1.0f);
+	//rng.seed(x * 49632 + z * 325176);
+	//std::cout << dist(rng) << std::endl;
+	float value = dist(rng);
+
+	return value;
+}
+
+void HeightGenerator::generateFractalHeights(std::vector<glm::vec3>& vertices)
+{
+	vertices.push_back(glm::vec3(0,0,0));
+	vertices.push_back(glm::vec3(50, 50, 0));
+	vertices.push_back(glm::vec3(100, 0, 0));
+
+	///*
+	float randomSize = 50;
+
+	for (int i = 0; i < 4; i++) {
+
+		for (int j = 0; j < vertices.size() - 1;) {
+		//for (auto it = vertices.begin(); it < vertices.end()-1; ) {
+			glm::vec3 v1 = vertices[j];
+			glm::vec3 v2 = vertices[j+1];
+
+			glm::vec3 v = fractalSplit(v1, v2);
+			v.y = v.y + std::floor((random() * randomSize) + 1);
+
+			vertices.emplace(vertices.begin() + j + 1, v);
+			j += 2;
+		}
+		randomSize /= 2;
+	}
+	//*/
+
+}

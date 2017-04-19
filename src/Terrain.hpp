@@ -15,6 +15,8 @@ public:
 
 	Mesh* generateTerrain();
 
+	Mesh * generateTerrain2();
+
 	Mesh *getMesh();
 
 private:

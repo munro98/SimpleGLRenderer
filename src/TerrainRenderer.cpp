@@ -6,7 +6,7 @@
 
 
 
-TerrainRenderer::TerrainRenderer(glm::mat4 projectionMatrix) : m_shader(PBRModelShader("pbrModelShader")), m_terrain(Terrain())
+TerrainRenderer::TerrainRenderer(glm::mat4 projectionMatrix) : m_shader(TerrainShader("terrainShader")), m_terrain(Terrain())
 {
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -15,11 +15,6 @@ TerrainRenderer::TerrainRenderer(glm::mat4 projectionMatrix) : m_shader(PBRModel
 	m_shader.loadProjectionMatrix(projectionMatrix);
 	m_shader.loadLightPosition(glm::vec3(1.0, 1.5, -2.0));
 	m_shader.loadLightColour(glm::vec3(2.0, 2.0, 2.0));
-
-	m_shader.loadMetallic(0.1);
-	m_shader.loadRoughness(0.2);
-	m_shader.loadAO(0.08);
-
 
 	m_shader.stop();
 

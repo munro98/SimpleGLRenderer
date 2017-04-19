@@ -20,7 +20,7 @@ SET(headers
 	"Terrain.hpp"
 	"TerrainRenderer.hpp"
 	"HeightGenerator.hpp"
-
+	"TerrainShader.hpp"
 )
 
 
@@ -46,6 +46,7 @@ SET(sources
 	"Terrain.cpp"
 	"TerrainRenderer.cpp"
 	"HeightGenerator.cpp"
+	"TerrainShader.cpp"
 )
 
 #Add executable target

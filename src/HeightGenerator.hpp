@@ -2,6 +2,7 @@
 #define PI 3.1415926535897932384626433832795 
 #define AMPLITUDE 64.0f
 #include <random>
+#include <glm/gtc/type_ptr.hpp>
 
 
 #include "Math.h"
@@ -24,6 +25,12 @@ public:
 	static int hash(int key);
 
 	static int hash(int x, int y);
+
+	static glm::vec3 fractalSplit(glm::vec3 v1, glm::vec3 v2);
+
+	static float random();
+
+	static void generateFractalHeights(std::vector<glm::vec3>& height);
 
 };
 
