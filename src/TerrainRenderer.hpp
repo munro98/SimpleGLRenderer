@@ -7,17 +7,18 @@
 
 #include "Terrain.hpp"
 
-class PBRModelRenderer
+class TerrainRenderer
 {
 public:
-	PBRModelRenderer(glm::mat4 projectionMatrix);
-	~PBRModelRenderer();
+	TerrainRenderer(glm::mat4 projectionMatrix);
+	~TerrainRenderer();
 
 	void render(glm::mat4 view, glm::mat4 model, glm::mat4 projection, glm::vec3 camPos);
 
 private:
 	PBRModelShader m_shader;
-	Mesh* m_mesh;
 	Texture* m_texture;
+
+	Terrain m_terrain;
 };
 

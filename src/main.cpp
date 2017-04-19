@@ -22,7 +22,7 @@
 #include "ModelRenderer.hpp"
 #include "SkyboxRenderer.hpp"
 #include "PBRModelRenderer.hpp"
-
+#include "TerrainRenderer.hpp"
 
 using namespace std;
 
@@ -108,7 +108,6 @@ float deltaFrame = 0.0;
 float lastFrame = 0.0;
 
 int main(int argc, char **argv) {
-
 	//Initialize the GLFW library
 	if (!glfwInit()) {
 		cerr << "Error: Could not initialize GLFW" << endl;
@@ -186,7 +185,7 @@ int main(int argc, char **argv) {
 	//ModelRenderer modelRenderer(projection);
 	PBRModelRenderer pbrmodelRenderer(projection);
 
-	
+	TerrainRenderer terrainRenderer(projection);
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -262,7 +261,7 @@ int main(int argc, char **argv) {
 
 		pbrmodelRenderer.render(view, model, projection, camera.getPosition());
 
-
+		terrainRenderer.render(view, model, projection, camera.getPosition());
 
 		
 

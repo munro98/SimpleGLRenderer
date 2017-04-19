@@ -1,4 +1,4 @@
-
+#pragma once
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Model.hpp"

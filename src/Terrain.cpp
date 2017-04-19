@@ -15,7 +15,6 @@ Terrain::~Terrain()
 
 Mesh * Terrain::generateTerrain()
 {
-	//int vertexCount = 4;
 
 	float heightMap[VERTEX_COUNT][VERTEX_COUNT];
 

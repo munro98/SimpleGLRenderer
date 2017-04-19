@@ -1,4 +1,4 @@
-#include "PBRModelRenderer.hpp"
+#include "TerrainRenderer.hpp"
 
 #include "OBJLoader.hpp"
 #include "Texture.hpp"
@@ -6,7 +6,7 @@
 
 
 
-PBRModelRenderer::PBRModelRenderer(glm::mat4 projectionMatrix) : m_shader(PBRModelShader("pbrModelShader"))
+TerrainRenderer::TerrainRenderer(glm::mat4 projectionMatrix) : m_shader(PBRModelShader("pbrModelShader")), m_terrain(Terrain())
 {
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -23,18 +23,17 @@ PBRModelRenderer::PBRModelRenderer(glm::mat4 projectionMatrix) : m_shader(PBRMod
 
 	m_shader.stop();
 
-	m_mesh = OBJLoader::loadObjModel("sphere");
-	m_texture = Loader::loadTexture("red");
+	m_texture = Loader::loadTexture("ground2048");
 
 	
 }
 
-PBRModelRenderer::~PBRModelRenderer()
+TerrainRenderer::~TerrainRenderer()
 {
 }
 
 
-void PBRModelRenderer::render(glm::mat4 view, glm::mat4 model, glm::mat4 projection, glm::vec3 camPos)
+void TerrainRenderer::render(glm::mat4 view, glm::mat4 model, glm::mat4 projection, glm::vec3 camPos)
 {
 	m_shader.use();
 	//Update uniforms
@@ -44,7 +43,7 @@ void PBRModelRenderer::render(glm::mat4 view, glm::mat4 model, glm::mat4 project
 
 	m_shader.loadCamPos(camPos);
 
-	glBindVertexArray(m_mesh->getVaoID());
+	glBindVertexArray(m_terrain.getMesh()->getVaoID());
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
@@ -55,8 +54,7 @@ void PBRModelRenderer::render(glm::mat4 view, glm::mat4 model, glm::mat4 project
 	glActiveTexture(GL_TEXTURE0);
 	m_texture->bind();
 
-	glDrawElements(GL_TRIANGLES, m_mesh->getVertexCount(), GL_UNSIGNED_INT, 0);
-	
+	glDrawElements(GL_TRIANGLES, m_terrain.getMesh()->getVertexCount(), GL_UNSIGNED_INT, 0);
 	Texture::unbind();
 
 	glDisableVertexAttribArray(0);

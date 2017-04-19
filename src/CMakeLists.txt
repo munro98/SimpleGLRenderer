@@ -18,6 +18,7 @@ SET(headers
 	"SkyboxShader.hpp"
 	"SkyboxRenderer.hpp"
 	"Terrain.hpp"
+	"TerrainRenderer.hpp"
 	"HeightGenerator.hpp"
 
 )
@@ -43,6 +44,7 @@ SET(sources
 	"SkyboxShader.cpp"
 	"SkyboxRenderer.cpp"
 	"Terrain.cpp"
+	"TerrainRenderer.cpp"
 	"HeightGenerator.cpp"
 )
 
