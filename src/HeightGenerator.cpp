@@ -128,7 +128,7 @@ float HeightGenerator::random()
 void HeightGenerator::generateFractalHeights(std::vector<glm::vec3>& vertices)
 {
 	vertices.push_back(glm::vec3(0,0,0));
-	vertices.push_back(glm::vec3(50, 50, 0));
+	//vertices.push_back(glm::vec3(50, 50, 0));
 	vertices.push_back(glm::vec3(100, 0, 0));
 
 	///*
@@ -137,7 +137,6 @@ void HeightGenerator::generateFractalHeights(std::vector<glm::vec3>& vertices)
 	for (int i = 0; i < 4; i++) {
 
 		for (int j = 0; j < vertices.size() - 1;) {
-		//for (auto it = vertices.begin(); it < vertices.end()-1; ) {
 			glm::vec3 v1 = vertices[j];
 			glm::vec3 v2 = vertices[j+1];
 
@@ -150,5 +149,12 @@ void HeightGenerator::generateFractalHeights(std::vector<glm::vec3>& vertices)
 		randomSize /= 2;
 	}
 	//*/
+
+}
+
+
+void HeightGenerator::generateDiamondSquareHeights(float *heights)
+{
+	*heights = random() * 50;
 
 }

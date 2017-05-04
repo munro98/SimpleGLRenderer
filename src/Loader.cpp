@@ -116,6 +116,7 @@ void Loader::bindIndicesBuffer(std::vector<int>& indices)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
 }
 
+//TODO: Handle errors
 Texture* Loader::loadTexture(std::string fileName)
 {
 	fileName = "./res/" + fileName + ".png";
@@ -125,7 +126,7 @@ Texture* Loader::loadTexture(std::string fileName)
 	int x, y, bytesPerPixel;
 	unsigned char* textureData = stbi_load(textureName, &x, &y, &bytesPerPixel, 3);
 
-	//if (textureData == nullptr)
+	//if (textureData)
 	{
 		//std::cout << "Texture load fail\n";
 		//return nullptr;
@@ -135,7 +136,12 @@ Texture* Loader::loadTexture(std::string fileName)
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, x, y, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData);
+
 	glGenerateMipmap(GL_TEXTURE_2D);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, 0.6f);
+
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	stbi_image_free(textureData);
@@ -144,7 +150,7 @@ Texture* Loader::loadTexture(std::string fileName)
 
 }
 
-
+//TODO: Handle errors
 GLuint Loader::loadCubeMap(std::vector<std::string> cubeFaces) {
 
 	GLuint texID;

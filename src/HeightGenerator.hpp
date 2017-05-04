@@ -6,6 +6,7 @@
 
 
 #include "Math.h"
+#include "Terrain.hpp"
 
 class HeightGenerator
 {
@@ -31,6 +32,10 @@ public:
 	static float random();
 
 	static void generateFractalHeights(std::vector<glm::vec3>& height);
+
+	static void generateFractalHeights(std::vector<std::vector<glm::vec3>*>& height);
+
+	static void generateDiamondSquareHeights(float * heights);
 
 };
 
