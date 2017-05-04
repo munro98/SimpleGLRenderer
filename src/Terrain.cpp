@@ -242,7 +242,7 @@ Mesh * Terrain::generateTerrain3()
 
 	float roughness = 100;
 	float min, max;
-	int lod = 4;
+	int lod = TERRAIN_LOD;
 	int divisions = 1 << lod;
 	//float * terrain = new float[divisions + 1][divisions + 1];
 	heightMap[0][0] = HeightGenerator::random();
